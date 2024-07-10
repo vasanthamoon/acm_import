@@ -1,0 +1,31 @@
+AWS ACM does not provide direct export functionality. 
+If you originally imported the certificate into ACM, you should have the original files (certificate, private key, and certificate chain). 
+If you created the certificate using AWS ACM, you will not be able to export the private key, 
+You will need to use the original source of the certificate (e.g., the CA that issued it).
+
+
+make sure the following files in pem format
+
+1 custom acm certificate
+
+2 The private key
+
+3 The certificate chain
+
+Import the Certificate into the Destination Region
+> Open the AWS Management Console > In the top right corner of the AWS Management Console, select the destination region from the drop-down menu. >
+Navigate to ACM > Open the Certificate Manager console > Import the Certificate > Click on Import a certificate > In the Certificate body field, paste the contents of your certificate file 
+and paste Certificate private key paste private key and Certificate chain paste Certificate chain file > Review the details and click Import to finish the process.
+
+aws cli method:
+
+Use the import-certificate command in sh format:
+
+aws acm import-certificate \
+    --region destination-region \
+    --certificate file://path_to_certificate_file \
+    --private-key file://path_to_private_key_file \
+    --certificate-chain file://path_to_certificate_chain_file
+
+replace with import region and path.
+
